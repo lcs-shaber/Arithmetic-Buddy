@@ -57,7 +57,8 @@ struct AdditionView: View {
             
             HStack{
                 
-                TextField("Make a guess", text: $givenInput)
+                TextField("Enter the sum", text: $givenInput)
+                    .font(Font.system(size: 50))
             }
             .multilineTextAlignment(.trailing)
             
@@ -99,6 +100,19 @@ struct AdditionView: View {
     // Check whether the user's answer was correct
     // Provide appropriate feedback
     func checkAnswer() {
+        
+        // Attempt to unwrap the input provided by the user
+        guard let selectedAnswer = Int(givenInput) else {
+            feedback = "Please provide an integer."
+            return
+        }
+        
+        
+        if firstNumber + secondNumber == selectedAnswer {
+            feedback = "You got it correct!!!!"
+        } else if firstNumber + secondNumber != selectedAnswer {
+            feedback = "Try again!"
+        }
         
     }
     
